@@ -1,4 +1,4 @@
-# musicxml_to_numbered_musical_notation
+# musicxml_to_luluxia_musical_notation
 
 ## Project setup
 ```
