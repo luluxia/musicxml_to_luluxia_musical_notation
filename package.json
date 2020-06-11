@@ -1,5 +1,5 @@
 {
-  "name": "musicxml_to_numbered_musical_notation",
+  "name": "musicxml_to_luluxia_musical_notation",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "x2js": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
