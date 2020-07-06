@@ -3,7 +3,9 @@
     <ul class="music">
       <li v-for="(bar, index) in music" v-bind:key="index" class="bar">
         <ul class="notes">
-          <li v-for="(note, index) in bar" v-bind:key="index" :class="['note', 'duration' + note[0], note[2], note[3]]">{{note[1]}}</li>
+          <li v-for="(note, index) in bar" v-bind:key="index" :class="['note', 'duration' + note[0], note[2], note[3]]">
+            <p>{{note[1]}}</p>
+          </li>
         </ul>
         <ul class="line">
           <li class="line_dashed"></li>
@@ -62,12 +64,16 @@ export default {
                 push[2] = 'high'
               }
               //判断类型
-              if(e['tie'] && e['tie']['_type'] == 'start'){
-                push[3] = 'start'
-              }else if(e['tie'] && e['tie']['_type'] == 'stop'){
-                push[3] = 'stop'
-              }else{
-                push[3] = ''
+              if(e['tie']){
+                if(e['tie'].length == undefined){
+                  if(e['tie']['_type'] == 'start'){
+                    push[3] = 'start'
+                  }else{
+                    push[3] = 'stop'
+                  }
+                }else{
+                  push[3] = 'middle'
+                }
               }
             }
             this.music[id].push(push)
@@ -162,6 +168,9 @@ html, body, #app{
   background: #4ebf55;
   border-right: 1px solid #fff;
 }
+.note p{
+  position: absolute;
+}
 .down{
   background: #337add;
 }
@@ -174,6 +183,11 @@ html, body, #app{
 }
 .stop{
   border-radius: 0 0.2em 0.2em 0;
+  color: transparent;
+}
+.middle{
+  border-radius: 0;
+  border: none;
   color: transparent;
 }
 .null{
