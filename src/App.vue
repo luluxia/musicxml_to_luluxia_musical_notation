@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="help" v-if="music == 0">
+      <p>使用方法：将musicxml文件拖入本页面</p>
+    </div>
     <ul class="music">
       <li v-for="(bar, index) in music" v-bind:key="index" class="bar">
         <ul class="notes">
@@ -125,10 +128,17 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-html, body, #app{
+html, body, #app, .help{
   height: 100vh;
 }
+.help{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .music{
+  position: relative;
+  top: 2em;
   display: grid;
   grid-template-columns: 14em 14em 14em 14em;
   width: 56em;
