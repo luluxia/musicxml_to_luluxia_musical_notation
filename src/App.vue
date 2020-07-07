@@ -2,6 +2,7 @@
   <div id="app">
     <div class="help" v-if="music == 0">
       <p>使用方法：将musicxml文件拖入本页面</p>
+      <p>最低八度：<input v-model="level" type="text"></p>
     </div>
     <ul class="music">
       <li v-for="(bar, index) in music" v-bind:key="index" class="bar">
@@ -29,12 +30,14 @@ export default {
   data() {
     return{
       //时值 音高 八度 类型
-      music: []
+      music: [],
+      level: 5
     }
   },
   methods: {
     getMusic(json) {
       let bar = json['score-partwise']['part']['measure']
+      let level = this.level - 1
       console.log(bar)
       bar.forEach((e, index) => {
         let id = index
@@ -59,11 +62,11 @@ export default {
                 push[1] += 'b'
               }
               //判断八度
-              if(note['octave'] == '4'){
+              if(note['octave'] == level){
                 push[2] = 'down'
-              }else if(note['octave'] == '5'){
+              }else if(note['octave'] == level + 1){
                 push[2] = ''
-              }else if(note['octave'] == '6'){
+              }else if(note['octave'] == level + 2){
                 push[2] = 'high'
               }
               //判断类型
@@ -135,6 +138,7 @@ html, body, #app, .help{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .music{
   position: relative;
